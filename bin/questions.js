@@ -24,6 +24,23 @@ function askQuestions() {
   ])
 }
 
+function askQuestionsAllDefault () {
+  return inquirer
+  .prompt([
+    {
+      type: 'input',
+      name: 'author',
+      message: chalk.cyan('你的名字'),
+      validate: function (value) {
+        return !!value || chalk.red('请输入你的姓名')
+      }
+    }
+  ]).then(answers => {
+    answers.mode = 'single page application'
+    return Promise.resolve(answers)
+  })
+}
+
 function askRemoveFolder() {
   return inquirer
   .prompt([
@@ -41,5 +58,6 @@ function askRemoveFolder() {
 
 module.exports = {
   askQuestions,
+  askQuestionsAllDefault,
   askRemoveFolder
 }
